@@ -1,0 +1,17 @@
+export enum UserRole {
+  ADMIN = "admin",
+  USER = "user",
+}
+
+export interface ICurrentUser {
+  id: string;
+  role: UserRole;
+  name: string;
+}
+
+export interface IUser {
+  id: string;
+  name: string | null;
+  username: string;
+  password: string;
+}
