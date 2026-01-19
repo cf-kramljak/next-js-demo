@@ -2,7 +2,6 @@ import Posts from "@/features/posts";
 import { POSTS_PER_PAGE } from "@/features/posts/posts.const";
 import { postsApi } from "@/lib/api";
 import { POSTS_QUERY_KEY } from "@/lib/constants";
-import { getSessionCookie } from "@/lib/cookies";
 import { getSSRQueryClient } from "@/lib/queryClient";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
@@ -14,17 +13,14 @@ interface IProps {
 
 const Home = async ({ searchParams }: IProps) => {
   const queryClient = getSSRQueryClient();
-  const sessionCookie = await getSessionCookie();
 
   const params = await searchParams;
   const page = params.page ? parseInt(params.page, 10) : 1;
 
-  if (sessionCookie) {
-    await queryClient.prefetchQuery({
-      queryKey: [POSTS_QUERY_KEY, page, POSTS_PER_PAGE],
-      queryFn: () => postsApi.getPosts(page, POSTS_PER_PAGE, sessionCookie),
-    });
-  }
+  await queryClient.prefetchQuery({
+    queryKey: [POSTS_QUERY_KEY, page, POSTS_PER_PAGE],
+    queryFn: () => postsApi.getPosts(page, POSTS_PER_PAGE),
+  });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

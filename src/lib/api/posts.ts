@@ -6,17 +6,12 @@ interface IGetPostsResponse {
   total: number;
 }
 
-const getPosts = async (
-  page: number,
-  limit: number,
-  sessionCookie?: string,
-) => {
-  return request<IGetPostsResponse>(
-    `/posts?page=${page}&limit=${limit}`,
-    sessionCookie
-      ? { headers: { Authorization: `Bearer ${sessionCookie}` } }
-      : {},
-  );
+const getPosts = async (page: number, limit: number) => {
+  return request<IGetPostsResponse>(`/posts?page=${page}&limit=${limit}`);
+};
+
+const getSinglePost = async (postId: string) => {
+  return request<IPost>(`/posts/${postId}`);
 };
 
 const createPost = async (title: string) => {
@@ -26,4 +21,4 @@ const createPost = async (title: string) => {
   });
 };
 
-export default { getPosts, createPost };
+export default { getPosts, getSinglePost, createPost };
