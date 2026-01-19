@@ -1,10 +1,22 @@
 import { IPost } from "@/interfaces";
 import { request } from "./request";
 
-const getPosts = async (sessionCookie?: string) => {
-  return request<IPost[]>("/posts", {
-    headers: sessionCookie ? { Cookie: `session=${sessionCookie}` } : undefined,
-  });
+interface IGetPostsResponse {
+  posts: IPost[];
+  total: number;
+}
+
+const getPosts = async (
+  page: number,
+  limit: number,
+  sessionCookie?: string,
+) => {
+  return request<IGetPostsResponse>(
+    `/posts?page=${page}&limit=${limit}`,
+    sessionCookie
+      ? { headers: { Authorization: `Bearer ${sessionCookie}` } }
+      : {},
+  );
 };
 
 const createPost = async (title: string) => {
