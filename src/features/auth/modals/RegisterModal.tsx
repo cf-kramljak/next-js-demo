@@ -81,8 +81,8 @@ const RegisterModal = ({ isOpen, onClose }: IProps) => {
             isShaking && "animate-shake",
           )}
         >
-          <div className="space-y-4">
-            <div className="space-y-2">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <Label htmlFor="register-username">Username</Label>
               <Input
                 id="register-username"
@@ -94,7 +94,7 @@ const RegisterModal = ({ isOpen, onClose }: IProps) => {
               />
             </div>
 
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Label htmlFor="register-password">Password</Label>
               <Input
                 id="register-password"
@@ -107,7 +107,7 @@ const RegisterModal = ({ isOpen, onClose }: IProps) => {
               />
             </div>
 
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Label htmlFor="confirm-password">Confirm Password</Label>
               <Input
                 id="confirm-password"

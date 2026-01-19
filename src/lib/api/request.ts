@@ -14,8 +14,6 @@ export const request = async <T>(
 ): Promise<T> => {
   const accessToken = getCookie(SESSION_COOKIE_NAME);
 
-  console.log({ accessToken });
-
   const requestConfig: RequestInit = {
     method: customConfig.method || "GET",
     ...customConfig,

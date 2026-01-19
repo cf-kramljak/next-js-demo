@@ -40,7 +40,7 @@ const Navigation = () => {
                   <p className="text-white w-full">
                     @{currentUser.name || "John Doe"}
                   </p>
-                  <Button onClick={handleLogout}>
+                  <Button variant="ghost" onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4 text-red-500" />
                     <span className="text-red-500">Logout</span>
                   </Button>
