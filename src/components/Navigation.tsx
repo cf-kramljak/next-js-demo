@@ -9,8 +9,12 @@ import { X } from "lucide-react";
 import RegisterModal from "@/features/auth/modals/RegisterModal";
 import useCurrentUser from "@/features/users/hooks/useCurrentUser";
 import { useSignOut } from "@/features/auth/hooks";
+import { useRouter } from "next/navigation";
+import { USER_SETTINGS_ROUTE } from "@/lib/constants";
 
 const Navigation = () => {
+  const router = useRouter();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -37,9 +41,13 @@ const Navigation = () => {
             <div className="flex items-center space-x-4">
               {!!currentUser ? (
                 <div className="flex items-center gap-4">
-                  <p className="text-white w-full">
-                    @{currentUser.name || "John Doe"}
-                  </p>
+                  <Button
+                    variant="ghost"
+                    className="text-white w-full p-0 text-base"
+                    onClick={() => router.push(USER_SETTINGS_ROUTE)}
+                  >
+                    @{currentUser.username || "johnDoe"}
+                  </Button>
                   <Button variant="ghost" onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4 text-red-500" />
                     <span className="text-red-500">Logout</span>
@@ -92,9 +100,13 @@ const Navigation = () => {
                     <div className="bg-gray-800 rounded-full p-2">
                       <User className="h-5 w-5 text-pink-500" />
                     </div>
-                    <span className="text-white font-medium">
-                      @{currentUser.name || "John Doe"}
-                    </span>
+                    <Button
+                      variant="ghost"
+                      className="text-white font-medium p-0 text-base"
+                      onClick={() => router.push(USER_SETTINGS_ROUTE)}
+                    >
+                      @{currentUser.username || "johnDoe"}
+                    </Button>
                   </div>
 
                   {/* Logout button for mobile */}

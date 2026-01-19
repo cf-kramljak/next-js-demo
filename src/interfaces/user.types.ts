@@ -6,7 +6,7 @@ export enum UserRole {
 export interface ICurrentUser {
   id: number;
   role: UserRole;
-  name: string;
+  username: string;
 }
 
 export interface IUser {
