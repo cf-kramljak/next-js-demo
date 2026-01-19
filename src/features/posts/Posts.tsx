@@ -5,19 +5,23 @@ import PostsList from "./components/PostsList";
 import CreatePostModal from "./components/modals/CreatePostModal";
 import { useState } from "react";
 import { Plus } from "lucide-react";
+import { useCurrentUser } from "../users/hooks";
 
 const Posts = () => {
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
+  const { data: currentUser } = useCurrentUser();
 
   return (
     <>
       <div className="flex flex-col gap-10 mt-20 p-10">
-        <Button
-          className="w-fit gap-2"
-          onClick={() => setIsCreatePostModalOpen(true)}
-        >
-          <Plus /> Create Post
-        </Button>
+        {currentUser && (
+          <Button
+            className="w-fit gap-2"
+            onClick={() => setIsCreatePostModalOpen(true)}
+          >
+            <Plus /> Create Post
+          </Button>
+        )}
         <PostsList />
       </div>
 

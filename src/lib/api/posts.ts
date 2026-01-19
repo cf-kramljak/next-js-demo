@@ -21,4 +21,10 @@ const createPost = async (title: string) => {
   });
 };
 
-export default { getPosts, getSinglePost, createPost };
+const deletePost = async (postId: string) => {
+  return request<void>(`/posts/${postId}`, {
+    method: "DELETE",
+  });
+};
+
+export default { getPosts, getSinglePost, createPost, deletePost };
