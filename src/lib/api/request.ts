@@ -23,9 +23,10 @@ export const request = async <T>(
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
       ...(customConfig.headers || {}),
     },
-    next: {
-      revalidate: 10,
-    },
+    // next: {
+    //   revalidate: 10,
+    // },
+    cache: "no-store",
   };
 
   if (body) {

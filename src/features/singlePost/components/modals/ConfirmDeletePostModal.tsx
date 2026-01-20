@@ -14,7 +14,6 @@ interface ConfirmDeletePostModalProps {
   postId: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  isDeleting?: boolean;
 }
 
 const ConfirmDeletePostModal = ({
