@@ -3,7 +3,7 @@ import { postsApi } from "@/lib/api";
 import { POST_ROUTE, SINGLE_POST_QUERY_KEY } from "@/lib/constants";
 import { getMetadataTitle } from "@/lib/metadata/metadataUtils";
 import { openGraphImage } from "@/lib/metadata/openGraphImage";
-import { getSSRQueryClient } from "@/lib/queryClient";
+import { getCachedQueryClient } from "@/lib/react-query/queryClient";
 import { Metadata, ResolvingMetadata } from "next";
 
 interface IParams {
@@ -31,7 +31,7 @@ export async function generateMetadata(
 
 const PostPage = async ({ params }: IParams) => {
   const paramsResolved = await params;
-  const queryClient = getSSRQueryClient();
+  const queryClient = getCachedQueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: [SINGLE_POST_QUERY_KEY, paramsResolved.postId],

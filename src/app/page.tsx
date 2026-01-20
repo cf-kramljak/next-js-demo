@@ -2,7 +2,7 @@ import Posts from "@/features/posts";
 import { POSTS_PER_PAGE } from "@/features/posts/posts.const";
 import { postsApi } from "@/lib/api";
 import { POSTS_QUERY_KEY } from "@/lib/constants";
-import { getSSRQueryClient } from "@/lib/queryClient";
+import { getCachedQueryClient } from "@/lib/react-query/queryClient";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const Home = async ({ searchParams }: IProps) => {
-  const queryClient = getSSRQueryClient();
+  const queryClient = getCachedQueryClient();
 
   const params = await searchParams;
   const page = params.page ? parseInt(params.page, 10) : 1;

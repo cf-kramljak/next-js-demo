@@ -5,10 +5,9 @@ import { QueryClient } from "@tanstack/react-query";
 export const queryClientDefaultOptions = {
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      staleTime: Number.POSITIVE_INFINITY,
       retry: false,
-      refetchOnWindowFocus: true,
-      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     },
     mutations: {
       retry: false,
@@ -16,6 +15,9 @@ export const queryClientDefaultOptions = {
   },
 };
 
-export const getSSRQueryClient = cache(
-  () => new QueryClient(queryClientDefaultOptions),
+export const getCachedQueryClient = cache(
+  () =>
+    new QueryClient({
+      ...queryClientDefaultOptions,
+    }),
 );

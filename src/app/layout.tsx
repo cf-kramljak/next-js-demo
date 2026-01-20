@@ -1,14 +1,14 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
-import { ReactQueryClientProvider } from "@/lib/providers/ReactQueryClientProvider";
-import { getSSRQueryClient } from "@/lib/queryClient";
+import { getCachedQueryClient } from "@/lib/react-query/queryClient";
 import { userApi } from "@/lib/api";
 import { getSessionCookie } from "@/lib/cookies";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { CURRENT_USER_QUERY_KEY } from "@/lib/constants";
 import { ToastContainerSetup } from "@/components/ui/Toast";
 import metadataConfig from "@/lib/metadata";
+import ReactQueryProvider from "@/lib/react-query/ReactQueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = getSSRQueryClient();
+  const queryClient = getCachedQueryClient();
   const sessionCookie = await getSessionCookie();
 
   if (sessionCookie) {
@@ -44,7 +44,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryClientProvider>
+        <ReactQueryProvider>
           <HydrationBoundary state={dehydratedState}>
             <main className="min-h-screen">
               <Navigation />
@@ -52,7 +52,7 @@ export default async function RootLayout({
             </main>
             <ToastContainerSetup />
           </HydrationBoundary>
-        </ReactQueryClientProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
