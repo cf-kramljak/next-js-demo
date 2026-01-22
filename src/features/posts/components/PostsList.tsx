@@ -15,6 +15,8 @@ const PostsList = () => {
 
   const totalPages = Math.ceil((data?.total ?? 0) / POSTS_PER_PAGE);
 
+  if (!data?.total) return null;
+
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
